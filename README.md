@@ -1,6 +1,7 @@
 # Affordability
 
-> Project description
+> See how the max house price you can afford with our easy-to-use calculator.
+
 
 ## Related Projects
 
