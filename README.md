@@ -1,6 +1,6 @@
 # Affordability
 
-> See how the max house price you can afford with our easy-to-use calculator.
+> Calculate your monthly mortgage payments based on income, house cost, interest rate, and down payment.
 
 
 ## Related Projects
