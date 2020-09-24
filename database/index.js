@@ -22,7 +22,18 @@ var seedData = function(data) {
   })
 };
 
+var getHomePrices = function(callback) {
+  connection.query(`SELECT * FROM homes`, (error, data) => {
+    if (error) {
+      callback(error);
+    } else {
+      callback(data);
+    }
+  })
+};
+
 
 module.exports = {
-  seedData
+  seedData,
+  getHomePrices
 }
