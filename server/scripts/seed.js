@@ -1,4 +1,4 @@
-const seedData = require('../../database/index.js')
-const data = require('./dummy_data')
+const databaseFunctions = require('../../database/index.js');
+const data = require('./dummy_data');
 
-seedData.seedData(data);
+databaseFunctions.seedData(data);

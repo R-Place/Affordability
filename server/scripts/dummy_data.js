@@ -1,13 +1,12 @@
+const prices = [];
 
-var prices = [];
-
-var count = 0;
-while (count <= 100) {
-  price =  Math.floor(Math.random() * (2999999 - 300000) + 300000);
+let count = 0;
+while (count < 100) {
+  const price = Math.floor(Math.random() * (3000000 - 800000) + 800000);
   prices.push(price);
-  count++;
+  count += 1;
 }
 
 module.exports = {
-  prices
-}
+  prices,
+};
