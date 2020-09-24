@@ -10,7 +10,6 @@ var seedData = function(data) {
       console.log(error);
     } else {
       data.prices.forEach((price) => {
-        console.log(price, 'PRICE')
         connection.query(`INSERT into homes (price) VALUES("${price}")`, (error, result) => {
           if (error) {
             console.log(error);
