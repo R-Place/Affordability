@@ -2,17 +2,7 @@ const db = require('../database/index.js');
 
 const data = require('../server/scripts/dummy_data.js');
 
-describe ('Testing sum and minus', () => { // eslint-disable-line
-  function minus(a, b) {
-    return a - b;
-  }
-
-  it ('Testing minus', () => { // eslint-disable-line
-    expect(minus(5, 2)).toBe(3);// eslint-disable-line
-  });
-});
-
-describe('Seeding Database', () => { // eslint-disable-line
+describe('Correctly Seeding A Database', () => { // eslint-disable-line
   // we need to check that the database is empty first
   db.connection.query('TRUNCATE homes', (error, result) => {
     if (error) {
@@ -32,7 +22,6 @@ describe('Seeding Database', () => { // eslint-disable-line
       db.getHomePrices((error, result) => {// eslint-disable-line
         expect(result.length).toBe(100); // eslint-disable-line
         done();
-        db.connection.end();
       });
     });
   });
