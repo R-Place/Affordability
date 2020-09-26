@@ -21,7 +21,9 @@ describe('Correctly Seeding A Database', () => { // eslint-disable-line
     db.seedDatabase(data, (error, result) => {// eslint-disable-line
       db.getHomePrices((error, result) => {// eslint-disable-line
         expect(result.length).toBe(100); // eslint-disable-line
-        done();
+        db.connection.end(() => {
+          done();
+        });
       });
     });
   });
