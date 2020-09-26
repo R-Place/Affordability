@@ -3,5 +3,5 @@ module.exports = {
 
   password: 'Pw0nZor1!',
 
-  database: 'affordability'
+  database: 'affordability',
 };

@@ -6,19 +6,18 @@ const connection = mysql.createConnection(mysqlConfig);
 
 connection.connect();
 
-const seedDatabase = (data, callback) => {
+const seedDatabase = ({ prices }, callback) => {
   connection.query('TRUNCATE homes', (error) => {
     if (error) {
       callback(error);
     } else {
-      data.prices.forEach((price) => {
-        connection.query(`INSERT into homes (price) VALUES("${price}")`, (newError, result) => {
-          if (error) {
-            callback(newError);
-          } else {
-            callback(null, result);
-          }
-        });
+      const strPrices = `("${prices.join('"), ("')}")`;
+      connection.query(`INSERT into homes (price) VALUES ${strPrices}`, (newError, result) => {
+        if (error) {
+          callback(newError);
+        } else {
+          callback(null, result);
+        }
       });
     }
   });
