@@ -21,5 +21,5 @@ app.get('/api/affordability', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);  // eslint-disable-line
+  console.log(`Listening at http://localhost:${port}`);
 });
