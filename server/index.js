@@ -1,20 +1,19 @@
 const express = require('express');
 
 const app = express();
-const bodyParser = require('body-parser');
 
 const port = 3000;
 const { Homes } = require('../database/index.js');
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/affordability', (req, res) => {
-  Homes.getPrices((error, results) => {
+  Homes.getPrices((error, prices) => {
     if (error) {
-      res.send(error);
+      console.log(error);
+      res.sendStatus(404);
     } else {
-      res.send(results);
+      res.send(prices);
     }
   });
 });
