@@ -11,7 +11,6 @@ import Styled from './Styled.jsx';
 const { AffordabiltyContainer, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, TextContainer, FlexContainer, GridContainer, GraphContainer } = Styled;
     // AffordabiltyContainer, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, TextContainer, FlexContainer, GridContainer
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
