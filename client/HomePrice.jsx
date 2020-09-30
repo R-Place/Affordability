@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from './Styled.jsx';
+import formatPriceStr from './helpers.js';
 
 const { GridCellBox, ControlsContainer, ControlInput, TextContainerBold, Input, SlideContainer, Slider } = Styled;
 
@@ -26,7 +27,7 @@ class HomePrice extends React.Component {
   }
 
   render() {
-    const { value } = this.state;
+    const { homePrice } = this.props;
     return (
       <GridCellBox width="1,1,1,0.33" className="homePrice">
         <ControlsContainer  className="homePriceController">
@@ -34,10 +35,10 @@ class HomePrice extends React.Component {
             <TextContainerBold className="text">
               <label htmlFor="price"> Home Price </label>
             </TextContainerBold>
-            <Input className="price" width="112px" type="number" id="price" placeholder={this.props.homePrice} name="price" min="0" max="3000000" value={`${value}`} onChange={this.onChange} onClick={this.handleClick} />
+            <Input className="price" width="112px" id="price" placeholder={homePrice} name="price" min="0" max="3000000" value={`$${formatPriceStr(homePrice)}`} onChange={this.onChange} onClick={this.handleClick} />
           </ControlInput>
           <SlideContainer className="Slider">
-            <Slider defaultValue={this.props.homePrice} type="range" min="0" max="3000000" onChange={this.onChange} />
+            <Slider defaultValue={homePrice} type="range" min="0" max="3000000" onChange={this.onChange} />
           </SlideContainer>
         </ControlsContainer>
       </GridCellBox>

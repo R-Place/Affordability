@@ -350,6 +350,7 @@ color: rgb(59, 65, 68);
 box-sizing: border-box;
 outline: none;
 position: absolute;
+padding-left: 6px;
 width: 100%;
 height: 100%;
 top: 0px;
