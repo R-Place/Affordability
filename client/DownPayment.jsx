@@ -40,8 +40,8 @@ class DownPayment extends React.Component {
                 <Styles.Percentage className="price" type="number" id="downPaymentPercentage" placeholder="20%" max="30" value={percent} onChange={this.onChange} onClick={this.handleClick}/>
               </Styles.DownPaymentWrapper>
           </Styles.ControlInput>
-            <Styles.SlideContainer className="slider">
-              <Styles.slider  type="range" min="0" className="price" max="3000000" value={value} onChange={this.onChange} />
+            <Styles.SlideContainer className="Slider">
+              <Styles.Slider  type="range" min="0" className="price" max="3000000" value={value} onChange={this.onChange} />
             </Styles.SlideContainer>
         </Styles.ControlsContainer>
       </Styles.GridCellBox>

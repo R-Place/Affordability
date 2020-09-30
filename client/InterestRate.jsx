@@ -33,8 +33,8 @@ class InterestRate extends React.Component {
             </Styles.TextContainerBold>
             < Styles.InterestRateInput className="price" width="112px" type="number" id="price" placeholder={this.props.interestRate} name="price" min="0" max="3000000" value={`${value}`} onChange={this.onChange} onClick={this.handleClick}/>
           </Styles.ControlInput>
-          <Styles.SlideContainer className="slider">
-            <Styles.slider type="range" min="0" max="300000" value={value} onChange={this.onChange} />
+          <Styles.SlideContainer className="Slider">
+            <Styles.Slider type="range" min="0" max="300000" value={value} onChange={this.onChange} />
           </Styles.SlideContainer>
         </Styles.ControlsContainer>
       </Styles.GridCellBox>
