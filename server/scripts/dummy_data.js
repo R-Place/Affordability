@@ -7,6 +7,4 @@ while (count < 100) {
   count += 1;
 }
 
-module.exports = {
-  prices,
-};
+module.exports = prices;
