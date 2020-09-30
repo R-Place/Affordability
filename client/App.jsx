@@ -6,7 +6,11 @@ import InterestRate from './InterestRate.jsx';
 import LoanType from './LoanType.jsx';
 import DonutGraph from './DonutGraph.jsx';
 import AffordabilityTable from './AffordabilityTable.jsx';
-import Styles from './Styled.jsx';
+import Styled from './Styled.jsx';
+
+const { AffordabiltyContainer, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, TextContainer, FlexContainer, GridContainer, GraphContainer } = Styled;
+    // AffordabiltyContainer, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, TextContainer, FlexContainer, GridContainer
+
 
 class App extends React.Component {
   constructor(props) {
@@ -173,39 +177,39 @@ class App extends React.Component {
      : null;
     }
     return (
-      <Styles.AffordabiltyContainer className="App">
-        <Styles.Padding className="padding">
-          <Styles.Header className="header">
-            <Styles.AffordabilityText className="text">
+      <AffordabiltyContainer className="App">
+        <Padding className="padding">
+          <Header className="header">
+            <AffordabilityText className="text">
               Affordability
-            </Styles.AffordabilityText>
-          </Styles.Header>
-        </Styles.Padding>
-        <Styles.PaddingTwo className="padding">
-            <Styles.TextContainerBold className="text">
+            </AffordabilityText>
+          </Header>
+        </Padding>
+        <PaddingTwo className="padding">
+            <TextContainerBold className="text">
               Calculate your monthly mortgage payments
-            </Styles.TextContainerBold>
-            <Styles.TextContainer className="text">
+            </TextContainerBold>
+            <TextContainer className="text">
                 Your est. payments: $
               {Math.floor(this.state.monthlyPayment).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               /month
-            </Styles.TextContainer>
-        </Styles.PaddingTwo>
-        <Styles.TextContainer className="text">
-          <Styles.FlexContainer className="flex">
-            <Styles.GridContainer className="grid">
+            </TextContainer>
+        </PaddingTwo>
+        <TextContainer className="text">
+          <FlexContainer className="flex">
+            <GridContainer className="grid">
               <HomePrice homePrice={this.state.homePrice} updateValues={this.updateValues} changeColor={this.changeColor} />
               <DownPayment  downPayment={this.state.downPayment} homePrice={this.state.homePrice} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor}/>
               <InterestRate interestRate={this.state.interestRate} changeColor={this.changeColor}/>
               <LoanType />
-            </Styles.GridContainer>
-          </Styles.FlexContainer>
-        </Styles.TextContainer>
-        <Styles.GraphContainer className="GraphContainer">
+            </GridContainer>
+          </FlexContainer>
+        </TextContainer>
+        <GraphContainer className="GraphContainer">
           <DonutGraph  monthlyPayment={this.state.monthlyPayment} principalPercentage={this.state.principalPercentage}  propertyTaxPercentage={this.state.propertyTaxPercentage} homeInsurancePercentage={this.state.homeInsurancePercentage} mortgageETCPercentage={this.state.mortgageETCPercentage}/>
           <AffordabilityTable principal={this.state.principal} propertyTax={this.state.propertyTax} homeInsurance={this.state.homeInsurance} mortgageETC={this.state.mortgageETC} />
-        </Styles.GraphContainer>
-      </Styles.AffordabiltyContainer>
+        </GraphContainer>
+      </AffordabiltyContainer>
     );
   }
 }
