@@ -9,5 +9,16 @@
   "files.trimTrailingWhitespace": true,
   "javascript.suggest.enabled": false,
   "javascript.updateImportsOnFileMove.enabled": "never",
-  "javascript.validate.enable": false
+  "javascript.validate.enable": false,
+  "eslint.validate": [
+    "vue",
+    "html",
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "eslint.workingDirectories": [
+
+  ]
 }

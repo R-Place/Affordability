@@ -13,12 +13,23 @@ const seedDatabase = ({ prices }, callback) => {
     } else {
       const strPrices = `("${prices.join('"), ("')}")`;
       connection.query(`INSERT into homes (price) VALUES ${strPrices}`, (newError, result) => {
-        if (error) {
+        if (newError) {
           callback(newError);
         } else {
           callback(null, result);
         }
       });
+    }
+  });
+};
+
+const insertHomePrices = (prices, callback) => {
+  const strPrices = `("${prices.join('"), ("')}")`;
+  connection.query(`INSERT into homes (price) VALUES ${strPrices}`, (error, result) => {
+    if (error) {
+      callback(error);
+    } else {
+      callback(null, result);
     }
   });
 };
@@ -37,4 +48,5 @@ module.exports = {
   connection,
   seedDatabase,
   getHomePrices,
+  insertHomePrices,
 };

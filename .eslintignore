@@ -1,0 +1,6 @@
+public/*.js
+.eslintrc.js
+client/*.jsx
+client/*.js
+client/*.html
+__tests__
