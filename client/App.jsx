@@ -76,7 +76,8 @@ class App extends React.Component {
 
 
 
-  updateValues(homePrice) {
+  updateValues(event) {
+    const homePrice = event.target.value;
     let downPayment = (homePrice * 20) / 100;
 
     this.setState({
@@ -160,7 +161,8 @@ class App extends React.Component {
     return unaccounted;
   }
 
-  changeColor(target) {
+  changeColor(event) {
+    const target = event.target;
     if (this.state.previouslyClicked !== null) {
       this.state.previouslyClicked.style.border = "1px solid rgb(205,209,212)";
     }
