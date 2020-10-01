@@ -41,6 +41,7 @@ class App extends React.Component {
     this.calculatePropertyTax = this.calculatePropertyTax.bind(this);
     this.calculatePrincipal = this.calculatePrincipal.bind(this);
     this.calculateETC = this.calculateETC.bind(this);
+    this.recalculateBasedOnInterest = this.recalculateBasedOnInterest.bind(this);
   }
 
 
@@ -166,6 +167,19 @@ class App extends React.Component {
     return unaccounted;
   }
 
+  recalculateBasedOnInterest(event) {
+    const interest = event.target.value
+    this.setState({
+      interestRate: interest
+    })
+    this.setState({
+      monthlyPayment: this.calculateMonthlyPayment(this.state.homePrice)
+    })
+    this.setState({
+      principal: this.calculatePrincipal()
+    })
+  }
+
   changeColor(event) {
     const target = event.target;
     if (this.state.previouslyClicked !== null) {
@@ -206,7 +220,7 @@ class App extends React.Component {
             <GridContainer className="grid">
               <HomePrice homePrice={this.state.homePrice} updateValues={this.updateValues} changeColor={this.changeColor} />
               <DownPayment  downPayment={this.state.downPayment} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor} percent={this.state.percent}/>
-              <InterestRate interestRate={this.state.interestRate} changeColor={this.changeColor}/>
+              <InterestRate interestRate={this.state.interestRate} changeColor={this.changeColor} recalculateBasedOnInterest={this.recalculateBasedOnInterest}/>
               <LoanType />
             </GridContainer>
           </FlexContainer>

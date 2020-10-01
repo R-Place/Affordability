@@ -1,47 +1,21 @@
 import React from 'react';
 import Styles from './Styled.jsx';
 
-class InterestRate extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-    };
-    this.onChange = this.onChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  onChange(event) {
-    this.setState({
-      value: event.target.value,
-    });
-  }
-
-  handleClick(event) {
-    var target = event.target;
-    this.props.changeColor(target);
-  }
-
-  render() {
-    const { value } = this.state;
-    const {interestRate, changeColor} = this.props;
-    return (
-      <Styles.GridCellBox width="1,1,1,0.33" className="interestRate">
-        <Styles.ControlsContainer  className="interestRateController">
-          <Styles.ControlInput className="ControlInput">
-            <Styles.TextContainerBold className="text">
-              <label htmlFor="price"> Interest Rate </label>
-            </Styles.TextContainerBold>
-            < Styles.InterestRateInput className="price" width="112px" id="price" placeholder={this.props.interestRate} name="price" min="0" max="3000000" value={`${interestRate}%`} onChange={this.onChange} onClick={this.handleClick}/>
-          </Styles.ControlInput>
-          <Styles.SlideContainer className="Slider">
-            <Styles.Slider type="range" min="0" max="300000" value={value} onChange={this.onChange} />
-          </Styles.SlideContainer>
-        </Styles.ControlsContainer>
-      </Styles.GridCellBox>
-    );
-  }
-}
+const InterestRate = ({interestRate, changeColor, recalculateBasedOnInterest}) => (
+  <Styles.GridCellBox width="1,1,1,0.33" className="interestRate">
+    <Styles.ControlsContainer  className="interestRateController">
+      <Styles.ControlInput className="ControlInput">
+        <Styles.TextContainerBold className="text">
+          <label htmlFor="price"> Interest Rate </label>
+        </Styles.TextContainerBold>
+        < Styles.InterestRateInput className="price" width="112px" id="interest" name="price" min="0.00" max="6.50" value={`${Number(interestRate).toFixed(2)}%`} onChange={recalculateBasedOnInterest} onClick={changeColor}/>
+      </Styles.ControlInput>
+      <Styles.SlideContainer className="Slider">
+        <Styles.Slider type="range" min="0" max="6.50" step="0.010" value={interestRate} onChange={recalculateBasedOnInterest} />
+      </Styles.SlideContainer>
+    </Styles.ControlsContainer>
+  </Styles.GridCellBox>
+);
 
 export default InterestRate;
 

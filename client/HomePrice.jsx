@@ -14,7 +14,7 @@ const HomePrice = ({ homePrice, changeColor, updateValues }) => (
         <Input className="price" width="112px" id="price" placeholder={homePrice} name="price" min="0" max="3000000" value={`$${formatPriceStr(homePrice)}`} onChange={updateValues} onClick={changeColor} />
       </ControlInput>
       <SlideContainer className="Slider">
-        <Slider defaultValue={homePrice} type="range" min="0" max="3000000" onChange={updateValues} />
+        <Slider value={homePrice} type="range" min="0" max="3000000" onChange={updateValues} />
       </SlideContainer>
     </ControlsContainer>
   </GridCellBox>
