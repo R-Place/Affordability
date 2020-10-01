@@ -24,6 +24,7 @@ class InterestRate extends React.Component {
 
   render() {
     const { value } = this.state;
+    const {interestRate, changeColor} = this.props;
     return (
       <Styles.GridCellBox width="1,1,1,0.33" className="interestRate">
         <Styles.ControlsContainer  className="interestRateController">
@@ -31,7 +32,7 @@ class InterestRate extends React.Component {
             <Styles.TextContainerBold className="text">
               <label htmlFor="price"> Interest Rate </label>
             </Styles.TextContainerBold>
-            < Styles.InterestRateInput className="price" width="112px" type="number" id="price" placeholder={this.props.interestRate} name="price" min="0" max="3000000" value={`${value}`} onChange={this.onChange} onClick={this.handleClick}/>
+            < Styles.InterestRateInput className="price" width="112px" id="price" placeholder={this.props.interestRate} name="price" min="0" max="3000000" value={`${interestRate}%`} onChange={this.onChange} onClick={this.handleClick}/>
           </Styles.ControlInput>
           <Styles.SlideContainer className="Slider">
             <Styles.Slider type="range" min="0" max="300000" value={value} onChange={this.onChange} />
