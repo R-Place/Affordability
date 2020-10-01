@@ -94,6 +94,21 @@ class App extends React.Component {
       principalPercentage: this.calculatePercentage(this.state.principalAndInterest, this.state.monthlyPayment),
       mortgageETCPercentage: this.calculatePercentage(this.state.mortgageETC, this.state.monthlyPayment)
     })
+
+    if (Number(homePrice) === 0) {
+      this.setState({
+        principalAndInterest: 0,
+        propertyTaxes: 0,
+        mortgageETC: 0
+      })
+      this.setState({
+        monthlyPayment: this.state.homeInsurance,
+        propertyTaxPercentage: 0,
+        homeInsurancePercentage: 100,
+        principalPercentage: 0,
+        mortgageETCPercentage: 0
+      })
+    }
   }
 
 
