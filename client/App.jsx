@@ -247,7 +247,7 @@ class App extends React.Component {
               Calculate your monthly mortgage payments
             </TextContainerBold>
             <TextContainer className="text">
-                Your est. payments: $
+              Your est. payments: $
               {formatPriceStr(Math.floor(this.state.monthlyPayment))}
               /month
             </TextContainer>

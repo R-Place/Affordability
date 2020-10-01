@@ -11,7 +11,7 @@ const insertPrices = (prices, callback) => {
   });
 };
 
-const seedDatabase = ({ prices }, callback) => {
+const seedDatabase = (prices, callback) => {
   connection.query('TRUNCATE homes', (error) => {
     if (error) {
       callback(error);
