@@ -23,7 +23,6 @@ class App extends React.Component {
       interestRate: 2.99,
       max: null,
       previouslyClicked: null,
-      principal: 0,
       homeInsurance: 75,
       propertyTax: 0,
       mortgageETC: 0,
@@ -31,7 +30,8 @@ class App extends React.Component {
       percent: 20,
       principalPercentage: 0,
       homeInsurancePercentage: 0,
-      propertyTaxPercentage: 0
+      propertyTaxPercentage: 0,
+      principalAndInterest: 0
     };
     this.getHomePrice = this.getHomePrice.bind(this);
     this.calculateMonthlyPayment = this.calculateMonthlyPayment.bind(this);
@@ -42,6 +42,7 @@ class App extends React.Component {
     this.calculatePrincipal = this.calculatePrincipal.bind(this);
     this.calculateETC = this.calculateETC.bind(this);
     this.recalculateBasedOnInterest = this.recalculateBasedOnInterest.bind(this);
+    this.calculateMonthlyInterest = this.calculateMonthlyInterest.bind(this);
   }
 
 
@@ -56,57 +57,56 @@ class App extends React.Component {
       let homePrice = response.data[randomIndex].price;
       this.setState({
         homePrice: homePrice,
-        downPayment: Math.floor((homePrice * 20) / 100),
-        monthlyPayment: this.calculateMonthlyPayment(homePrice),
-        max: this.calculateMaxDownPayment(homePrice),
-        propertyTax: this.calculatePropertyTax(homePrice),
       })
-      this.setState({
-        principal: this.calculatePrincipal(),
-        propertyTaxPercentage: this.calculatePercentage(this.state.propertyTax, this.state.monthlyPayment),
-        homeInsurancePercentage: this.calculatePercentage(this.state.homeInsurance, this.state.monthlyPayment)
-      })
-      this.setState({
-        principalPercentage: this.calculatePercentage(this.state.principal, this.state.monthlyPayment),
-        mortgageETC: this.calculateETC()
-      })
-      this.setState({
-        mortgageETCPercentage: this.calculatePercentage(this.state.mortgageETC, this.state.monthlyPayment)
-      })
+      this.updateValues();
     })
   }
 
+  calculateMonthlyInterest() {
+    const interest = ((this.state.interestRate / 100) / 12) * (this.state.homePrice - this.state.downPayment)
+    return interest;
+  }
 
 
   updateValues(event) {
-    const homePrice = event.target.value;
+    let homePrice;
+    if (event) {
+      homePrice = event.target.value;
+    } else {
+      homePrice = this.state.homePrice;
+    }
     let downPayment = (homePrice * 20) / 100;
-
     this.setState({
       homePrice: homePrice,
-      downPayment: downPayment,
-      monthlyPayment: this.calculateMonthlyPayment(homePrice),
-      propertyTax: this.calculatePropertyTax(homePrice),
-      principal: this.calculatePrincipal(),
-      propertyTaxPercentage: this.calculatePercentage(this.state.propertyTax, this.state.monthlyPayment),
-      homeInsurancePercentage: this.calculatePercentage(this.state.homeInsurance, this.state.monthlyPayment),
-      principalPercentage: this.calculatePercentage(this.state.principal, this.state.monthlyPayment),
-      mortgageETCPercentage: this.calculatePercentage(this.state.mortgageETC, this.state.monthlyPayment)
+      downPayment: Math.floor((homePrice * 20) / 100),
+      max: this.calculateMaxDownPayment(homePrice),
+      propertyTax: this.calculatePropertyTax(homePrice)
     })
     this.setState({
-      percent: this.calculatePercentage(downPayment, this.state.homePrice),
-      max: this.state.homePrice * .30
+      principalAndInterest: this.calculateMonthlyInterest() + this.calculatePrincipal(),
+      monthlyInterest: this.calculateMonthlyInterest(),
+      principal: this.calculatePrincipal()
+    })
+    this.setState({
+      monthlyPayment: this.calculateMonthlyPayment(),
+      propertyTaxPercentage: this.calculatePercentage(this.state.propertyTax, this.state.monthlyPayment),
+      homeInsurancePercentage: this.calculatePercentage(this.state.homeInsurance, this.state.monthlyPayment),
+      principalPercentage: this.calculatePercentage(this.state.principalAndInterest, this.state.monthlyPayment),
+      mortgageETCPercentage: this.calculatePercentage(this.state.mortgageETC, this.state.monthlyPayment)
     })
   }
+
 
   updateMonthlyPayment(event) {
     const downPayment = event.target.value;
     this.setState({
       downPayment: downPayment,
+    })
+    this.setState({
+      principalAndInterest: this.calculateMonthlyInterest() + this.calculatePrincipal(),
       monthlyPayment: this.calculateMonthlyPayment(this.state.homePrice),
       percent: this.calculatePercentage(downPayment, this.state.homePrice),
-      principal: this.calculatePrincipal(),
-      principalPercentage: this.calculatePercentage(this.state.principal, this.state.monthlyPayment),
+      principalPercentage: this.calculatePercentage(this.state.principalAndInterest, this.state.monthlyPayment),
       propertyTaxPercentage: this.calculatePercentage(this.state.propertyTax, this.state.monthlyPayment),
       homeInsurancePercentage: this.calculatePercentage(this.state.homeInsurance, this.state.monthlyPayment),
       mortgageETC: this.calculateETC(),
@@ -117,24 +117,13 @@ class App extends React.Component {
     })
   }
 
-  calculateMonthlyPayment(homePrice) {
-    let principalLoan = homePrice - this.state.downPayment;
-    let monthlyInterest = this.state.interestRate / 100;
-    let loanType = this.state.loanType;
-    let monthlyPayment = (principalLoan * (monthlyInterest / 12) * Math.pow(1 + (monthlyInterest / 12), (12 * loanType)) / Math.pow(1 + (monthlyInterest / 12), (12 * loanType)) - 1) * 2;
-    monthlyPayment = monthlyPayment;
-    if (monthlyPayment < 0) {
-      return 75;
-    }
+  calculateMonthlyPayment(homePrice = this.state.homePrice) {
+    const monthlyPayment = this.state.principalAndInterest + this.state.propertyTax + this.state.homeInsurance;
     return monthlyPayment;
   }
 
   calculatePrincipal() {
-    let insurancePlusTax = this.state.homeInsurance + this.state.propertyTax;
-    let principal = this.state.monthlyPayment - insurancePlusTax;
-    if (principal < 0) {
-      return 0;
-    }
+    const principal = (this.state.homePrice - this.state.downPayment) / (this.state.loanType * 12);
     return principal;
   }
 
@@ -160,7 +149,7 @@ class App extends React.Component {
   }
 
   calculateETC() {
-    let unaccounted = this.state.monthlyPayment - this.state.principal - this.state.propertyTax - this.state.homeInsurance;
+    let unaccounted = this.state.monthlyPayment - this.state.principalAndInterest - this.state.propertyTax - this.state.homeInsurance;
     if (unaccounted < 0) {
       return 0;
     }
@@ -168,16 +157,11 @@ class App extends React.Component {
   }
 
   recalculateBasedOnInterest(event) {
-    const interest = event.target.value
+    const interestRate = event.target.value;
     this.setState({
-      interestRate: interest
+      interestRate: Number(interestRate),
     })
-    this.setState({
-      monthlyPayment: this.calculateMonthlyPayment(this.state.homePrice)
-    })
-    this.setState({
-      principal: this.calculatePrincipal()
-    })
+    this.updateValues();
   }
 
   changeColor(event) {
@@ -227,7 +211,7 @@ class App extends React.Component {
         </TextContainer>
         <GraphContainer className="GraphContainer">
           <DonutGraph  monthlyPayment={this.state.monthlyPayment} principalPercentage={this.state.principalPercentage}  propertyTaxPercentage={this.state.propertyTaxPercentage} homeInsurancePercentage={this.state.homeInsurancePercentage} mortgageETCPercentage={this.state.mortgageETCPercentage}/>
-          <AffordabilityTable principal={this.state.principal} propertyTax={this.state.propertyTax} homeInsurance={this.state.homeInsurance} mortgageETC={this.state.mortgageETC} />
+          <AffordabilityTable principal={this.state.principalAndInterest} propertyTax={this.state.propertyTax} homeInsurance={this.state.homeInsurance} mortgageETC={this.state.mortgageETC} />
         </GraphContainer>
       </AffordabiltyContainer>
     );

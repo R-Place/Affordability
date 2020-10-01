@@ -3,3 +3,4 @@ const formatPriceStr = (price) => {
 };
 
 export default formatPriceStr;
+

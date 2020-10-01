@@ -10,7 +10,6 @@ const DownPayment = ({ updateMonthlyPayment, max, downPayment, percent, changeCo
           <label htmlFor="downPayment">Down Payment </label>
         </Styles.TextContainerBold>
           <Styles.DownPaymentWrapper>
-            {console.log(max)}
             <Styles.DownPayment className="price" width="112px" id="downPayment" name="price" min="0" max={max} value={`$${formatPriceStr(downPayment)}`}  onChange={updateMonthlyPayment} onClick={changeColor}/>
             <Styles.Percentage className="price" id="downPaymentPercentage" max="30" value={`${Math.trunc(percent)}%`} onChange={updateMonthlyPayment} onClick={changeColor}/>
           </Styles.DownPaymentWrapper>
