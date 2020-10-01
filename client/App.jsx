@@ -43,6 +43,7 @@ class App extends React.Component {
     this.calculateETC = this.calculateETC.bind(this);
     this.recalculateBasedOnInterest = this.recalculateBasedOnInterest.bind(this);
     this.calculateMonthlyInterest = this.calculateMonthlyInterest.bind(this);
+    this.changeLoan = this.changeLoan.bind(this);
   }
 
 
@@ -113,10 +114,15 @@ class App extends React.Component {
 
 
   updateMonthlyPayment(event) {
-    const downPayment = event.target.value;
-    this.setState({
-      downPayment: downPayment,
-    })
+    let downPayment;
+    if (event) {
+      downPayment = event.target.value;
+      this.setState({
+        downPayment: downPayment,
+      })
+    } else {
+      downPayment = this.state.downPayment;
+    }
     this.setState({
       principalAndInterest: this.calculateMonthlyInterest() + this.calculatePrincipal(),
       monthlyPayment: this.calculateMonthlyPayment(this.state.homePrice),
@@ -190,6 +196,38 @@ class App extends React.Component {
     })
   }
 
+  changeLoan(event) {
+    const loan = event.target.value;
+    console.log(loan.includes("FHA"))
+
+    let loanType;
+    if (loan.includes("30")) {
+      loanType = 30;
+    } else if (loan.includes("20")) {
+      loanType = 20;
+    } else if (loan.includes("15")) {
+      loanType = 15;
+    } else if (loan.includes("10")) {
+      loanType = 10;
+    }
+
+    this.setState({
+      loanType: loanType,
+      downPayment: this.state.homePrice * (loanType / 100)
+    });
+
+    if (loan.includes("FHA")) {
+      this.setState({
+        downPayment: this.state.homePrice * (3.50 / 100)
+      })
+
+    } else if (loan.includes("VA")) {
+      this.setState({
+        downPayment: 0
+      })
+    }
+  }
+
   render() {
     {this.state.max === null
      ? this.getHomePrice()
@@ -218,9 +256,9 @@ class App extends React.Component {
           <FlexContainer className="flex">
             <GridContainer className="grid">
               <HomePrice homePrice={this.state.homePrice} updateValues={this.updateValues} changeColor={this.changeColor} />
-              <DownPayment  downPayment={this.state.downPayment} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor} percent={this.state.percent}/>
+              <DownPayment  downPayment={this.state.downPayment} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor} percent={this.state.percent} homePrice={this.state.homePrice}/>
               <InterestRate interestRate={this.state.interestRate} changeColor={this.changeColor} recalculateBasedOnInterest={this.recalculateBasedOnInterest}/>
-              <LoanType />
+              <LoanType changeLoan={this.changeLoan} loanType={this.state.loanType}/>
             </GridContainer>
           </FlexContainer>
         </TextContainer>

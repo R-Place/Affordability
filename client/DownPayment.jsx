@@ -2,7 +2,7 @@ import React from 'react';
 import Styles from './Styled.jsx';
 import formatPriceStr from './helpers.js';
 
-const DownPayment = ({ updateMonthlyPayment, max, downPayment, percent, changeColor} ) => (
+const DownPayment = ({ homePrice, updateMonthlyPayment, max, downPayment, changeColor} ) => (
   <Styles.GridCellBox width="1,1,1,0.33" className="downPayment">
     <Styles.ControlsContainer className="downPaymentController">
       <Styles.ControlInput className="controlInput">
@@ -11,7 +11,7 @@ const DownPayment = ({ updateMonthlyPayment, max, downPayment, percent, changeCo
         </Styles.TextContainerBold>
           <Styles.DownPaymentWrapper>
             <Styles.DownPayment className="price" width="112px" id="downPayment" name="price" min="0" max={max} value={`$${formatPriceStr(downPayment)}`}  onChange={updateMonthlyPayment} onClick={changeColor}/>
-            <Styles.Percentage className="price" id="downPaymentPercentage" max="30" value={`${Math.trunc(percent)}%`} onChange={updateMonthlyPayment} onClick={changeColor}/>
+            <Styles.Percentage className="price" id="downPaymentPercentage" max="30" value={`${Math.trunc((downPayment / homePrice) * 100 )}%`} onChange={updateMonthlyPayment} onClick={changeColor}/>
           </Styles.DownPaymentWrapper>
       </Styles.ControlInput>
         <Styles.SlideContainer className="Slider">

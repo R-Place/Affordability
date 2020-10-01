@@ -14,6 +14,7 @@ class LoanType extends React.Component {
     this.setState({
       option: event.target.value
     })
+    this.props.changeLoan(event);
   }
 
   render() {
@@ -21,9 +22,8 @@ class LoanType extends React.Component {
       <Styles.GridCellBox width="1,1,1,0.33" className="homePrice">
         <Styles.ControlsContainer  className="homePriceController">
           <Styles.ControlInput className="ControlInput">
-            <Styles.TextContainerBold className="text"> Loan Type
-              {/* <label htmlFor="select"> Loan Type </label> */}
-
+            <Styles.TextContainerBold className="text">
+              Loan Type
             <Styles.SelectContainer className="selectContainer">
               <Styles.Selection className="select" value={this.state.option} onChange={this.onChange}>
                 <option data-id="0" value="30-year fixed" >30-year fixed</option>
@@ -33,7 +33,7 @@ class LoanType extends React.Component {
                 <option data-id="4" value="FHA 30-year fixed">FHA 30-year fixed</option>
                 <option data-id="5" value="FHA 15-year fixed">FHA 15-year fixed</option>
                 <option data-id="6" value="VA 30-year fixed">VA 30-year fixed</option>
-                <option data-id="7" value="VA 15-year fixed">vA 15-year fixed</option>
+                <option data-id="7" value="VA 15-year fixed">VA 15-year fixed</option>
               </Styles.Selection>
             </Styles.SelectContainer>
             </Styles.TextContainerBold>
