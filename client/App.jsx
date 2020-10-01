@@ -7,7 +7,7 @@ import LoanType from './LoanType.jsx';
 import DonutGraph from './DonutGraph.jsx';
 import AffordabilityTable from './AffordabilityTable.jsx';
 import Styled from './Styled.jsx';
-import formatPriceStr from './helpers.js';
+import helpers from './helpers.js';
 
 const { AffordabiltyContainer, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, TextContainer, FlexContainer, GridContainer, GraphContainer } = Styled;
     // AffordabiltyContainer, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, TextContainer, FlexContainer, GridContainer
@@ -17,21 +17,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       homePrice: 0,
-      downPayment: 0,
-      monthlyPayment: 0,
+      percent: 20,
       loanType: 30,
       interestRate: 2.99,
       max: null,
       previouslyClicked: null,
-      homeInsurance: 75,
-      propertyTax: 0,
-      mortgageETC: 0,
-      mortgageETCPercentage: 0,
-      percent: 20,
-      principalPercentage: 0,
-      homeInsurancePercentage: 0,
-      propertyTaxPercentage: 0,
-      principalAndInterest: 0,
       loanTypeString: '30-year fixed'
     };
     this.getHomePrice = this.getHomePrice.bind(this);
@@ -46,8 +36,6 @@ class App extends React.Component {
     this.calculateMonthlyInterest = this.calculateMonthlyInterest.bind(this);
     this.changeLoan = this.changeLoan.bind(this);
   }
-
-
 
   getHomePrice() {
     axios({
@@ -125,7 +113,10 @@ class App extends React.Component {
       downPayment = this.state.downPayment;
     }
     this.setState({
-      principalAndInterest: this.calculateMonthlyInterest() + this.calculatePrincipal(),
+      principalAndInterest: this.calculateMonthlyInterest() + this.calculatePrincipal()
+    })
+
+    this.setState({
       monthlyPayment: this.calculateMonthlyPayment(this.state.homePrice),
       percent: this.calculatePercentage(downPayment, this.state.homePrice),
       principalPercentage: this.calculatePercentage(this.state.principalAndInterest, this.state.monthlyPayment),
@@ -197,12 +188,15 @@ class App extends React.Component {
     })
   }
 
+
   changeLoan(event) {
     const loan = event.target.value;
+    const newState = {}
 
-    this.setState({
-      loanTypeString: loan
-    })
+    newState.loanTypeString = loan;
+    // this.setState({
+    //   loanTypeString: loan
+    // })
 
     let loanType;
     if (loan.includes("30")) {
@@ -214,26 +208,36 @@ class App extends React.Component {
     } else if (loan.includes("10")) {
       loanType = 10;
     }
+    newState.loanType= loanType;
 
-    this.setState({
-      loanType: loanType,
-      downPayment: Math.floor(this.state.homePrice * (loanType / 100))
-    });
+    // this.setState({
+    //   loanType: loanType,
+    // })
 
     if (loan.includes("FHA")) {
-      this.setState({
-        downPayment: this.state.homePrice * (3.50 / 100)
-      })
+      newState.downPayment = this.state.homePrice * (3.50 / 100);
+      // this.setState({
+      //   downPayment: this.state.homePrice * (3.50 / 100)
+      // })
 
     } else if (loan.includes("VA")) {
-      this.setState({
-        downPayment: 0
-      })
+      newState.downPayment = 0;
+      // this.setState({
+      //   downPayment: 0
+      // })
     }
-    this.updateMonthlyPayment();
+    this.setState(newState, this.updateMonthlyPayment)
+    // this.updateMonthlyPayment();
   }
 
   render() {
+    const {homePrice, percent, interestRate, loanType} = this.state;
+    const downPayment = helpers.getDownPayment(homePrice, percent);
+    const principalAndInterest = helpers.getPrincipalAndInterest(homePrice, downPayment, loanType, interestRate);
+    const propertyTax = helpers.getPropertyTax(homePrice);
+    const mortgageETC = helpers.getMortgageInsETC(homePrice, downPayment);
+    const HOME_INSURANCE = 75;
+    const monthlyPayment = helpers.getMonthlyPayment(homePrice, downPayment, loanType, interestRate, HOME_INSURANCE);
     {this.state.max === null
      ? this.getHomePrice()
      : null;
@@ -253,23 +257,23 @@ class App extends React.Component {
             </TextContainerBold>
             <TextContainer className="text">
               Your est. payments: $
-              {formatPriceStr(Math.floor(this.state.monthlyPayment))}
+              {helpers.formatPriceStr(Math.floor(monthlyPayment))}
               /month
             </TextContainer>
         </PaddingTwo>
         <TextContainer className="text">
           <FlexContainer className="flex">
             <GridContainer className="grid">
-              <HomePrice homePrice={this.state.homePrice} updateValues={this.updateValues} changeColor={this.changeColor} />
-              <DownPayment  downPayment={this.state.downPayment} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor} percent={this.state.percent} homePrice={this.state.homePrice}/>
-              <InterestRate interestRate={this.state.interestRate} changeColor={this.changeColor} recalculateBasedOnInterest={this.recalculateBasedOnInterest}/>
-              <LoanType changeLoan={this.changeLoan} loanType={this.state.loanType} loanTypeString={this.state.loanTypeString}/>
+              <HomePrice homePrice={homePrice} updateValues={this.updateValues} changeColor={this.changeColor} />
+              <DownPayment  downPayment={downPayment} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor} percent={percent} homePrice={homePrice}/>
+              <InterestRate interestRate={interestRate} changeColor={this.changeColor} recalculateBasedOnInterest={this.recalculateBasedOnInterest}/>
+              <LoanType changeLoan={this.changeLoan} loanType={loanType} loanTypeString={this.state.loanTypeString}/>
             </GridContainer>
           </FlexContainer>
         </TextContainer>
         <GraphContainer className="GraphContainer">
-          <DonutGraph  monthlyPayment={this.state.monthlyPayment} principalPercentage={this.state.principalPercentage}  propertyTaxPercentage={this.state.propertyTaxPercentage} homeInsurancePercentage={this.state.homeInsurancePercentage} mortgageETCPercentage={this.state.mortgageETCPercentage}/>
-          <AffordabilityTable principal={this.state.principalAndInterest} propertyTax={this.state.propertyTax} homeInsurance={this.state.homeInsurance} mortgageETC={this.state.mortgageETC} />
+          <DonutGraph  monthlyPayment={monthlyPayment} principalAndInterest={principalAndInterest}  propertyTax={propertyTax} homeInsurance={HOME_INSURANCE} mortgageETC={mortgageETC}/>
+          <AffordabilityTable principal={principalAndInterest} propertyTax={propertyTax} homeInsurance={HOME_INSURANCE} mortgageETC={mortgageETC} />
         </GraphContainer>
       </AffordabiltyContainer>
     );
