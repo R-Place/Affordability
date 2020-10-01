@@ -31,7 +31,8 @@ class App extends React.Component {
       principalPercentage: 0,
       homeInsurancePercentage: 0,
       propertyTaxPercentage: 0,
-      principalAndInterest: 0
+      principalAndInterest: 0,
+      loanTypeString: '30-year fixed'
     };
     this.getHomePrice = this.getHomePrice.bind(this);
     this.calculateMonthlyPayment = this.calculateMonthlyPayment.bind(this);
@@ -182,7 +183,7 @@ class App extends React.Component {
     this.setState({
       interestRate: Number(interestRate),
     })
-    this.updateValues();
+    this.updateMonthlyPayment();
   }
 
   changeColor(event) {
@@ -198,7 +199,10 @@ class App extends React.Component {
 
   changeLoan(event) {
     const loan = event.target.value;
-    console.log(loan.includes("FHA"))
+
+    this.setState({
+      loanTypeString: loan
+    })
 
     let loanType;
     if (loan.includes("30")) {
@@ -213,7 +217,7 @@ class App extends React.Component {
 
     this.setState({
       loanType: loanType,
-      downPayment: this.state.homePrice * (loanType / 100)
+      downPayment: Math.floor(this.state.homePrice * (loanType / 100))
     });
 
     if (loan.includes("FHA")) {
@@ -226,6 +230,7 @@ class App extends React.Component {
         downPayment: 0
       })
     }
+    this.updateMonthlyPayment();
   }
 
   render() {
@@ -258,7 +263,7 @@ class App extends React.Component {
               <HomePrice homePrice={this.state.homePrice} updateValues={this.updateValues} changeColor={this.changeColor} />
               <DownPayment  downPayment={this.state.downPayment} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor} percent={this.state.percent} homePrice={this.state.homePrice}/>
               <InterestRate interestRate={this.state.interestRate} changeColor={this.changeColor} recalculateBasedOnInterest={this.recalculateBasedOnInterest}/>
-              <LoanType changeLoan={this.changeLoan} loanType={this.state.loanType}/>
+              <LoanType changeLoan={this.changeLoan} loanType={this.state.loanType} loanTypeString={this.state.loanTypeString}/>
             </GridContainer>
           </FlexContainer>
         </TextContainer>
