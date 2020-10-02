@@ -30,6 +30,10 @@ class App extends React.Component {
     this.changeLoan = this.changeLoan.bind(this);
     this.updateMonthlyPayment = this.updateMonthlyPayment.bind(this);
     this.recalculateBasedOnInterest = this.recalculateBasedOnInterest.bind(this);
+    this.updateHomePrice = this.updateHomePrice.bind(this);
+    this.updateDownPayment = this.updateDownPayment.bind(this);
+    this.updateInterestRate = this.updateInterestRate.bind(this);
+    this.updateDownPaymentPercent = this.updateDownPaymentPercent.bind(this);
   }
 
   getHomePrice() {
@@ -131,6 +135,42 @@ class App extends React.Component {
     this.setState(newState, this.updateMonthlyPayment)
   }
 
+  updateHomePrice(event) {
+    event.preventDefault();
+    const newValue = Number(event.target.value.replace(/[^\d.]/g, ''))
+    this.setState({
+      homePrice: newValue
+    });
+  }
+
+  updateDownPayment(event) {
+    console.log('WORKING?')
+    event.preventDefault();
+    const newValue = Number(event.target.value.replace(/[^\d.]/g, ''))
+
+    this.setState({
+      percent: helpers.calculatePercentage(newValue, this.state.homePrice)
+    });
+  }
+
+  updateInterestRate(event) {
+    event.preventDefault();
+    const newValue = Number(event.target.value.replace(/[^\d.]/g, ''))
+
+    this.setState({
+      interestRate: newValue
+    });
+  }
+
+  updateDownPaymentPercent(event) {
+    event.preventDefault();
+    const newValue = Number(event.target.value.replace(/[^\d.]/g, ''))
+
+    this.setState({
+      percent: newValue
+    });
+  }
+
   render() {
     const {homePrice, percent, interestRate, loanType} = this.state;
     const downPayment = helpers.getDownPayment(homePrice, percent);
@@ -165,9 +205,9 @@ class App extends React.Component {
         <TextContainer className="text">
           <FlexContainer className="flex">
             <GridContainer className="grid">
-              <HomePrice homePrice={homePrice} updateValues={this.updateValues} changeColor={this.changeColor} />
-              <DownPayment  downPayment={downPayment} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor} percent={percent} homePrice={homePrice}/>
-              <InterestRate interestRate={interestRate} changeColor={this.changeColor} recalculateBasedOnInterest={this.recalculateBasedOnInterest}/>
+              <HomePrice homePrice={homePrice} updateValues={this.updateValues} changeColor={this.changeColor} updateHomePrice={this.updateHomePrice}/>
+              <DownPayment  updateDownPaymentPercent={this.updateDownPaymentPercent} updateDownPayment={this.updateDownPayment} downPayment={downPayment} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor} percent={percent} homePrice={homePrice}/>
+              <InterestRate interestRate={interestRate} changeColor={this.changeColor} recalculateBasedOnInterest={this.recalculateBasedOnInterest} updateInterestRate={this.updateInterestRate} />
               <LoanType changeLoan={this.changeLoan} loanType={loanType} loanTypeString={this.state.loanTypeString}/>
             </GridContainer>
           </FlexContainer>
