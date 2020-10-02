@@ -786,5 +786,31 @@ border-color: transparent;
 }
 `;
 
-export default {AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayment, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor, TrackSlider, ThumbSlider, ButtonCellBox, Button };
+const Centered = styled.div`
+font-family: TruliaSans, system, -apple-system, Roboto, "Segoe UI Bold", Arial, sans-serif;
+color: rgb(59, 65, 68);
+font-size: 16px;
+line-height: 1.5;
+letter-spacing: -0.1px;
+box-sizing: border-box;
+outline: none;
+-webkit-box-flex: 0;
+flex: 0 0 auto;
+display: block;
+border-style: solid;
+border-color: transparent;
+border-width: 4px 2px 0px;
+text-align: center;
+@media (min-width: 376px) {
+  width: 100%;
+}
+@media (min-width: 570px) {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  width: 66%;
+}
+`;
+
+export default {AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayment, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor, TrackSlider, ThumbSlider, ButtonCellBox, Button, Centered };
 

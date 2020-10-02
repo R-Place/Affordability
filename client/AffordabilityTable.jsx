@@ -85,6 +85,12 @@ const AffordabilityTable = ({ principal, propertyTax, homeInsurance, mortgageETC
         </Styles.TableMediaContainer>
         <Styles.ButtonCellBox>
           <Styles.Button>Get Pre-Qualified</Styles.Button>
+          <Styles.Centered>
+          or
+        </Styles.Centered>
+        <Styles.Centered>
+          See today's mortgage rates
+        </Styles.Centered>
         </Styles.ButtonCellBox>
       </Styles.TableCellBox>
     </Styles.TableGridContainer>

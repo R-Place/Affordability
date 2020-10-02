@@ -13,14 +13,10 @@ import DonutGraph from '../client/DonutGraph.jsx';
 
 const { AffordabiltyContainer, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, TextContainer, FlexContainer, GridContainer, GraphContainer } = Styled;
 
-describe('A suite', function() {
+describe('Affordability', function() {
   let wrapper;
 
   beforeEach(() => wrapper = shallow(<App />));
-
-  it('should render a <div />', () => {
-    expect(wrapper.find(AffordabiltyContainer).length).toEqual(1);
-  });
 
   it('should be selectable by class "App"', function() {
     expect(shallow(<App />).is('.App')).toBe(true);
