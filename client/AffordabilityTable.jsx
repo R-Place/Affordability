@@ -3,7 +3,7 @@ import Styles from './Styled.jsx';
 
 const AffordabilityTable = ({ principal, propertyTax, homeInsurance, mortgageETC}) => (
   <Styles.AffordabilityTableContainer>
-    <Styles.TableGridContainer spacing="tighter">
+    <Styles.TableGridContainer>
       <Styles.TableCellBox className="PrincipalInterest">
         <Styles.TableMediaContainer>
           <Styles.MediaContent>
@@ -83,6 +83,9 @@ const AffordabilityTable = ({ principal, propertyTax, homeInsurance, mortgageETC
           <b>${Math.floor(mortgageETC).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b>
           </Styles.TextContainer>
         </Styles.TableMediaContainer>
+        <Styles.ButtonCellBox>
+          <Styles.Button>Get Pre-Qualified</Styles.Button>
+        </Styles.ButtonCellBox>
       </Styles.TableCellBox>
     </Styles.TableGridContainer>
   </Styles.AffordabilityTableContainer>

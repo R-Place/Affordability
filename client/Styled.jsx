@@ -27,7 +27,7 @@ letter-spacing: -0.1px;
 box-sizing: border-box;
 outline: none;
 font-weight: bold;
-font-size: 18px;
+font-size: 20px;
 line-height: 1.2;
 `;
 
@@ -37,7 +37,7 @@ color: rgb(59, 65, 68);
 letter-spacing: -0.1px;
 box-sizing: border-box;
 outline: none;
-font-size: 14px;
+font-size: 16px;
 line-height: 1.5;
 `;
 
@@ -49,7 +49,7 @@ letter-spacing: -0.1px;
 box-sizing: border-box;
 font-weight: bold;
 outline: none;
-font-size: 14px;
+font-size: 16px;
 line-height: 1.5;
 `;
 
@@ -478,8 +478,8 @@ line-height: 1.5;
 letter-spacing: -0.1px;
 box-sizing: border-box;
 outline: none;
-width: 280px;
-height: 280px;
+width: 330px;
+height: 330px;
 `;
 
 const DonutLabelContainer = styled.div`
@@ -492,7 +492,7 @@ box-sizing: border-box;
 outline: none;
 position: absolute;
 top: 44%;
-left: -4%;
+left: 3%;
 transform: translateY(-50%);
 margin: 0px;
 width: 100%;
@@ -735,6 +735,56 @@ border-radius: 8px;
 margin-right: 5px;
 `;
 
+const ButtonCellBox = styled.div`
+font-family: TruliaSans, system, -apple-system, Roboto, "Segoe UI Bold", Arial, sans-serif;
+color: rgb(59, 65, 68);
+font-size: 16px;
+line-height: 1.5;
+letter-spacing: -0.1px;
+box-sizing: border-box;
+outline: none;
+width: 100%;
+-webkit-box-flex: 0;
+flex: 0 0 auto;
+display: block;
+border-style: solid;
+border-color: transparent;
+border-width: 32px 2px 0px;
+`;
 
-export default {AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayment, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor, TrackSlider, ThumbSlider };
+const Button = styled.button`
+font-family: TruliaSans, system, -apple-system, Roboto, "Segoe UI Bold", Arial, sans-serif;
+letter-spacing: -0.1px;
+box-sizing: border-box;
+outline: none;
+text-decoration: none;
+margin: 0px;
+border-radius: 8px;
+border-width: 1px;
+border-style: solid;
+cursor: pointer;
+display: inline-block;
+text-align: center;
+font-weight: bold;
+transition: top 0.1s ease 0s, box-shadow 0.1s ease 0s, border-color 0.1s ease 0s, background-color 0.1s ease 0s, color 0.1s ease 0s;
+white-space: nowrap;
+font-size: 16px;
+line-height: 1.5;
+padding: 8px 16px;
+width: 66%;
+color: rgb(255, 255, 255);
+background-color: rgb(0, 120, 130);
+border-color: transparent;
+@media (min-width: 376px) {
+  width: 100%;
+}
+@media (min-width: 570px) {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  width: 66%;
+}
+`;
+
+export default {AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayment, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor, TrackSlider, ThumbSlider, ButtonCellBox, Button };
 

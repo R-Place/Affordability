@@ -1,6 +1,4 @@
-public/*.js
+public/
 .eslintrc.js
-client/*.jsx
-client/*.js
-client/*.html
+client/
 __tests__
