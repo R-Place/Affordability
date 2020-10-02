@@ -249,8 +249,65 @@ height: 20px;
 display: flex;
 -webkit-box-align: center;
 align-items: center;
+position: relative;
 `;
 
+const TrackSlider = styled.input`
+{
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height:2px;
+  outline:none;
+  margin:0;
+  padding:0;
+  -webkit-appearance: none;
+};
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    background: #D0D0D0;
+    border: 0.2px solid #FFFFFF;
+    border-radius: 1.3px;
+    height: 5px;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: transparent;
+    height: 1px;
+    width: 1px;
+    box-shadow: -600px 0 0 600px #007882;
+  }
+`;
+
+const ThumbSlider = styled.input`
+{
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height:0px;
+  outline:none;
+  margin:0;
+  padding:0;
+  -webkit-appearance: none;
+};
+&::-webkit-slider-runnable-track {
+    background: transparent;
+    cursor: pointer;
+  }
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  width:12px;
+  height:12px;
+  border-radius:16px;
+  border:4px solid #FFFFFF;
+  background: #007882;
+  box-shadow:0 2px 4px 0 ",";
+  margin: 0px;
+  box-sizing:content-box;
+  }
+`;
 
 const Slider = styled.input`
 {
@@ -678,5 +735,6 @@ border-radius: 8px;
 margin-right: 5px;
 `;
 
-export default {AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayment, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor };
+
+export default {AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayment, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor, TrackSlider, ThumbSlider };
 

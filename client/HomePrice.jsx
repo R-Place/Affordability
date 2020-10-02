@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from './Styled.jsx';
 import helpers from './helpers.js';
 
-const { GridCellBox, ControlsContainer, ControlInput, TextContainerBold, Input, SlideContainer, Slider } = Styled;
+const { GridCellBox, ControlsContainer, ControlInput, TextContainerBold, Input, SlideContainer, Slider, TrackSlider, ThumbSlider } = Styled;
 
 const HomePrice = ({ colorSliderTrack, homePrice, changeColor, updateValues }) => (
   <GridCellBox width="1,1,1,0.33" className="homePrice">
@@ -13,8 +13,9 @@ const HomePrice = ({ colorSliderTrack, homePrice, changeColor, updateValues }) =
         </TextContainerBold>
         <Input className="price" width="112px" id="price" placeholder={homePrice} name="price" min="0" max="3000000" value={`$${helpers.formatPriceStr(homePrice)}`} onChange={updateValues} onClick={changeColor} />
       </ControlInput>
-      <SlideContainer className="Slider">
-        <Slider value={homePrice} type="range" min="0" max="3000000" onChange={updateValues} />
+      <SlideContainer>
+        <TrackSlider value={homePrice} type="range" min="0" max="3000000" onChange={updateValues} />
+        <ThumbSlider value={homePrice} type="range" min="0" max="3000000" onChange={updateValues} />
       </SlideContainer>
     </ControlsContainer>
   </GridCellBox>

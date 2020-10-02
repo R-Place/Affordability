@@ -15,7 +15,8 @@ const DownPayment = ({ homePrice, updateMonthlyPayment, max, downPayment, change
           </Styles.DownPaymentWrapper>
       </Styles.ControlInput>
         <Styles.SlideContainer className="Slider">
-          <Styles.Slider  type="range" min="0" className="price" max={max} value={downPayment} onChange={updateMonthlyPayment} />
+          <Styles.TrackSlider  type="range" min="0" className="price" max={max} value={downPayment} onChange={updateMonthlyPayment} />
+          <Styles.ThumbSlider type="range" min="0" className="price" max={max} value={downPayment} onChange={updateMonthlyPayment} />
         </Styles.SlideContainer>
     </Styles.ControlsContainer>
   </Styles.GridCellBox>

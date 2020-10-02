@@ -11,8 +11,9 @@ const InterestRate = ({interestRate, changeColor, recalculateBasedOnInterest}) =
         < Styles.InterestRateInput className="price" width="112px" id="interest" name="price" min="0.00" max="6.50" value={`${Number(interestRate).toFixed(2)}%`} onChange={recalculateBasedOnInterest} onClick={changeColor}/>
       </Styles.ControlInput>
       <Styles.SlideContainer className="Slider">
-        <Styles.Slider type="range" min="0" max="6.50" step="0.010" value={interestRate} onChange={recalculateBasedOnInterest} />
-      </Styles.SlideContainer>
+          <Styles.TrackSlider  type="range" min="0"  max="6.50"  step="0.10"value={interestRate} onChange={recalculateBasedOnInterest} />
+          <Styles.ThumbSlider type="range" min="0"  max="6.50"  step="0.10"value={interestRate} onChange={recalculateBasedOnInterest} />
+        </Styles.SlideContainer>
     </Styles.ControlsContainer>
   </Styles.GridCellBox>
 );
