@@ -10,7 +10,6 @@ import Styled from './Styled.jsx';
 import helpers from './helpers.js';
 
 const { AffordabiltyContainer, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, TextContainer, FlexContainer, GridContainer, GraphContainer, TrackSlider, ThumbSlider } = Styled;
-    // AffordabiltyContainer, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, TextContainer, FlexContainer, GridContainer
 
 class App extends React.Component {
   constructor(props) {
@@ -24,7 +23,7 @@ class App extends React.Component {
       previouslyClicked: null,
       loanTypeString: '30-year fixed'
     };
-    this.getHomePrice = this.getHomePrice.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.updateValues = this.updateValues.bind(this);
     this.changeColor = this.changeColor.bind(this);
     this.changeLoan = this.changeLoan.bind(this);
@@ -36,7 +35,7 @@ class App extends React.Component {
     this.updateDownPaymentPercent = this.updateDownPaymentPercent.bind(this);
   }
 
-  getHomePrice() {
+  componentDidMount() {
     axios({
       method: 'get',
       url: '/api/affordability'
@@ -179,10 +178,11 @@ class App extends React.Component {
     const mortgageETC = helpers.getMortgageInsETC(homePrice, downPayment);
     const HOME_INSURANCE = 75;
     const monthlyPayment = helpers.getMonthlyPayment(homePrice, downPayment, loanType, interestRate, HOME_INSURANCE);
-    {this.state.max === null
-     ? this.getHomePrice()
-     : null;
-    }
+    const principalAndInterestPercentage = helpers.calculatePercentage(principalAndInterest, monthlyPayment);
+    const homeInsurancePercentage = helpers.calculatePercentage(HOME_INSURANCE, monthlyPayment);
+    const propertyTaxPercentage = helpers.calculatePercentage(propertyTax, monthlyPayment);
+    const mortgageETCPercentage = helpers.calculatePercentage(mortgageETC, monthlyPayment);
+
     return (
       <AffordabiltyContainer className="App">
         <Padding className="padding">
@@ -213,7 +213,7 @@ class App extends React.Component {
           </FlexContainer>
         </TextContainer>
         <GraphContainer className="GraphContainer">
-          <DonutGraph  monthlyPayment={monthlyPayment} principalAndInterest={principalAndInterest}  propertyTax={propertyTax} homeInsurance={HOME_INSURANCE} mortgageETC={mortgageETC}/>
+          <DonutGraph  monthlyPayment={monthlyPayment} principalAndInterestPercentage={principalAndInterestPercentage}  propertyTaxPercentage={propertyTaxPercentage} homeInsurancePercentage={homeInsurancePercentage} mortgageETCPercentage={mortgageETCPercentage}/>
           <AffordabilityTable principal={principalAndInterest} propertyTax={propertyTax} homeInsurance={HOME_INSURANCE} mortgageETC={mortgageETC} />
         </GraphContainer>
       </AffordabiltyContainer>
