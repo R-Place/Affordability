@@ -2,11 +2,11 @@ import React from 'react';
 import Styles from './Styled.jsx';
 import helpers from './helpers.js';
 
-const DonutGraph = ({ monthlyPayment, principalAndInterest, homeInsurance, propertyTax, mortgageETC }) => {
-  const principalAndInterestPercentage = helpers.calculatePercentage(principalAndInterest, monthlyPayment);
-  const homeInsurancePercentage = helpers.calculatePercentage(homeInsurance, monthlyPayment);
-  const propertyTaxPercentage = helpers.calculatePercentage(propertyTax, monthlyPayment);
-  const mortgageETCPercentage = helpers.calculatePercentage(mortgageETC, monthlyPayment);
+const DonutGraph = ({ monthlyPayment, principalAndInterestPercentage, homeInsurancePercentage, propertyTaxPercentage, mortgageETCPercentage }) => {
+  // const principalAndInterestPercentage = helpers.calculatePercentage(principalAndInterest, monthlyPayment);
+  // const homeInsurancePercentage = helpers.calculatePercentage(homeInsurance, monthlyPayment);
+  // const propertyTaxPercentage = helpers.calculatePercentage(propertyTax, monthlyPayment);
+  // const mortgageETCPercentage = helpers.calculatePercentage(mortgageETC, monthlyPayment);
   return (
     <Styles.DonutChartContainer className="DonutChartContainer">
     <Styles.InnerChartContainer className="InnerContainer">
