@@ -1,40 +1,8 @@
-const mysql = require('mysql');
+const connection = require('./config.js');
 
-const mysqlConfig = require('./config.js');
-
-const connection = mysql.createConnection(mysqlConfig);
-
-connection.connect();
-
-const seedDatabase = ({ prices }, callback) => {
-  connection.query('TRUNCATE homes', (error) => {
-    if (error) {
-      callback(error);
-    } else {
-      const strPrices = `("${prices.join('"), ("')}")`;
-      connection.query(`INSERT into homes (price) VALUES ${strPrices}`, (newError, result) => {
-        if (error) {
-          callback(newError);
-        } else {
-          callback(null, result);
-        }
-      });
-    }
-  });
-};
-
-const getHomePrices = (callback) => {
-  connection.query('SELECT * FROM homes', (error, data) => {
-    if (error) {
-      callback(error);
-    } else {
-      callback(null, data);
-    }
-  });
-};
+const Homes = require('./homes.js');
 
 module.exports = {
   connection,
-  seedDatabase,
-  getHomePrices,
+  Homes,
 };

@@ -1,4 +1,10 @@
-const databaseFunctions = require('../../database/index.js');
-const data = require('./dummy_data');
+const { Homes } = require('../../database/index.js');
+const prices = require('./dummy_data');
 
-databaseFunctions.seedData(data);
+Homes.seedDatabase(prices, (error, success) => {
+  if (error) {
+    return console.log(error);
+  }
+
+  return console.log(success);
+});
