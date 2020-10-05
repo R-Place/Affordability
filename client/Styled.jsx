@@ -17,7 +17,7 @@ position: absolute;
 top: 50%;
 left: 55%;
 margin-right: -30%;
-transform: translate(-50%, -50%)
+transform: translate(-50%, -50%);
 `;
 
 const AffordabilityText = styled.div`
@@ -158,7 +158,7 @@ border-width: 16px 8px 0px;
 @media (min-width: 570px) {
   width: 100%;
 }
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   width: 33%;
 }
 `;
@@ -359,7 +359,7 @@ margin: 0;
 }
 `;
 
-const DownPayment = styled.input`
+const DownPayments = styled.input`
 box-sizing: border-box;
 font-family: TruliaSans, system, -apple-system, Roboto, "Segoe UI Bold", Arial, sans-serif;
 border-width: 1px 0px 1px 1px;
@@ -389,7 +389,6 @@ margin: 0;
 
 const SelectContainer = styled.div`
 width: 240px;
-display: inline-block;
 -webkit-box-align: center;
 align-items: center;
 position: relative;
@@ -812,5 +811,5 @@ text-align: center;
 }
 `;
 
-export default {AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayment, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor, TrackSlider, ThumbSlider, ButtonCellBox, Button, Centered };
+export default {AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayments, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor, TrackSlider, ThumbSlider, ButtonCellBox, Button, Centered };
 

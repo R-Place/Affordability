@@ -20,7 +20,7 @@ const AffordabilityTable = ({ principal, propertyTax, homeInsurance, mortgageETC
             </Styles.TableTitle>
           </Styles.MediaContent>
               <Styles.TextContainer>
-                <b>${Math.floor(principal).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b>
+                <b>${Math.trunc(principal).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b>
               </Styles.TextContainer>
         </Styles.TableMediaContainer>
       </Styles.TableCellBox>
@@ -40,7 +40,7 @@ const AffordabilityTable = ({ principal, propertyTax, homeInsurance, mortgageETC
             </Styles.TableTitle>
           </Styles.MediaContent>
           <Styles.TextContainer>
-          <b>${Math.floor(propertyTax).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b>
+          <b>${Math.trunc(propertyTax).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b>
           </Styles.TextContainer>
         </Styles.TableMediaContainer>
       </Styles.TableCellBox>
@@ -60,7 +60,7 @@ const AffordabilityTable = ({ principal, propertyTax, homeInsurance, mortgageETC
               </Styles.TableTitle>
           </Styles.MediaContent>
           <Styles.TextContainer>
-          <b>${Math.floor(homeInsurance).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b>
+          <b>${Math.trunc(homeInsurance).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b>
           </Styles.TextContainer>
         </Styles.TableMediaContainer>
       </Styles.TableCellBox>
@@ -80,7 +80,7 @@ const AffordabilityTable = ({ principal, propertyTax, homeInsurance, mortgageETC
             </Styles.TableTitle>
           </Styles.MediaContent>
           <Styles.TextContainer>
-          <b>${Math.floor(mortgageETC).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b>
+          <b>${Math.trunc(mortgageETC).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b>
           </Styles.TextContainer>
         </Styles.TableMediaContainer>
         <Styles.ButtonCellBox>

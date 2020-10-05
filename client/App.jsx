@@ -41,13 +41,16 @@ class App extends React.Component {
       url: '/api/affordability'
     })
     .then((response) => {
-      let randomIndex = Math.floor(Math.random() * 100);
+      let randomIndex = Math.trunc(Math.random() * 100);
       let homePrice = response.data[randomIndex].price;
       this.setState({
         homePrice: homePrice,
       })
       this.updateValues();
     })
+    .catch((error) => {
+      null;
+    });
   }
 
   updateValues(event) {
@@ -57,10 +60,8 @@ class App extends React.Component {
     } else {
       homePrice = this.state.homePrice;
     }
-    let downPayment = (homePrice * 20) / 100;
     this.setState({
       homePrice: homePrice,
-      downPayment: Math.floor((homePrice * 20) / 100),
       max: this.calculateMaxDownPayment(homePrice),
     })
   }
@@ -69,13 +70,9 @@ class App extends React.Component {
     let downPayment;
     if (event) {
       downPayment = event.target.value;
-      this.setState({
-        downPayment: downPayment,
-      })
     } else {
-      downPayment = this.state.downPayment;
+      downPayment = helpers.getDownPayment(this.state.homePrice, this.state.percent);
     }
-
     this.setState({
       percent: helpers.calculatePercentage(downPayment, this.state.homePrice),
       max: this.state.homePrice * .30
@@ -85,7 +82,7 @@ class App extends React.Component {
 
   calculateMaxDownPayment(homePrice) {
     var max = homePrice * .30;
-    return max;
+    return Math.trunc(max);
   }
 
   recalculateBasedOnInterest(event) {
@@ -143,7 +140,6 @@ class App extends React.Component {
   }
 
   updateDownPayment(event) {
-    console.log('WORKING?')
     event.preventDefault();
     const newValue = Number(event.target.value.replace(/[^\d.]/g, ''))
 
@@ -198,7 +194,7 @@ class App extends React.Component {
             </TextContainerBold>
             <TextContainer className="text">
               Your est. payments: $
-              {helpers.formatPriceStr(Math.floor(monthlyPayment))}
+              {helpers.formatPriceStr(Math.trunc(monthlyPayment))}
               /month
             </TextContainer>
         </PaddingTwo>
@@ -208,7 +204,7 @@ class App extends React.Component {
               <HomePrice homePrice={homePrice} updateValues={this.updateValues} changeColor={this.changeColor} updateHomePrice={this.updateHomePrice}/>
               <DownPayment  updateDownPaymentPercent={this.updateDownPaymentPercent} updateDownPayment={this.updateDownPayment} downPayment={downPayment} max={this.state.max} updateMonthlyPayment={this.updateMonthlyPayment} changeColor={this.changeColor} percent={percent} homePrice={homePrice}/>
               <InterestRate interestRate={interestRate} changeColor={this.changeColor} recalculateBasedOnInterest={this.recalculateBasedOnInterest} updateInterestRate={this.updateInterestRate} />
-              <LoanType changeLoan={this.changeLoan} loanType={loanType} loanTypeString={this.state.loanTypeString}/>
+              <LoanType changeLoan={this.changeLoan} loanType={loanType} loanTypeString={this.state.loanTypeString} changeColor={this.changeColor} />
             </GridContainer>
           </FlexContainer>
         </TextContainer>
