@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-const port = 3000;
+const port = 3003;
 const { Homes } = require('../database/index.js');
 
 app.use(express.static('public'));
@@ -13,7 +13,8 @@ app.get('/api/affordability', (req, res) => {
       console.log(error);
       res.sendStatus(404);
     } else {
-      res.send(prices);
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+      res.status(200).send(prices);
     }
   });
 });

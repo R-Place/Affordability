@@ -38,7 +38,7 @@ class App extends React.Component {
   componentDidMount() {
     axios({
       method: 'get',
-      url: '/api/affordability'
+      url: 'http://localhost:3003/api/affordability',
     })
     .then((response) => {
       let randomIndex = Math.trunc(Math.random() * 100);

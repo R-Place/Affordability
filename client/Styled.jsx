@@ -810,6 +810,7 @@ text-align: center;
   width: 66%;
 }
 `;
+const styles = { AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayments, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor, TrackSlider, ThumbSlider , ButtonCellBox, Button, Centered };
 
-export default {AffordabiltyContainer, TextContainer, ControlsContainer, FlexContainer, GridContainer, GridCellBox, Padding, Header, AffordabilityText, PaddingTwo, TextContainerBold, Input, ControlInput,  SlideContainer, Slider, Percentage, DownPayments, SelectContainer, Selection, DownPaymentWrapper, InterestRateInput, GraphContainer, DonutChartContainer, InnerChartContainer, DonutGraphContainer, SVGViewBox, DonutLabelContainer, DonutLabel, DonutLabelAmount, DonutLabelUnit, AffordabilityTableContainer, TableGridContainer, TableCellBox, TableMediaContainer, MediaContent, TableTitle, PrincipalColor, TableMediaContainerWidth, PropertyTaxesColor, HomeInsuranceColor, MortgageColor, TrackSlider, ThumbSlider, ButtonCellBox, Button, Centered };
+export { styles as default, ThumbSlider};
 

@@ -4,9 +4,8 @@ import DownPayment from './DownPayment.jsx';
 import InterestRate from './InterestRate.jsx';
 import App from './App.jsx';
 import helpers from './helpers.js';
-import Styled from './Styled.jsx'
+import { ThumbSlider } from './Styled.jsx'
 
-const { ThumbSlider } = Styled;
 
 describe('DownPayment Component', () => {
 
