@@ -182,7 +182,7 @@ class App extends React.Component {
     return (
       <AffordabiltyContainer className="App">
         <Padding className="padding">
-          <Header className="header">
+          <Header>
             <AffordabilityText className="text">
               Affordability
             </AffordabilityText>

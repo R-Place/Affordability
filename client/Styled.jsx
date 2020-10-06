@@ -14,7 +14,7 @@ margin: 32px 0px;
 display: flex;
 flex-direction: column;
 position: absolute;
-top: 50%;
+top: 223%;
 left: 55%;
 margin-right: -30%;
 transform: translate(-50%, -50%);
