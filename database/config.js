@@ -5,10 +5,6 @@ const mysqlConfig = {
 
   port: '3306',
 
-  // host: '3.88.85.5',
-
-  // port: '8000',
-
   user: 'root',
 
   password: 'complexpassword',

@@ -36,13 +36,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    let id = this.getId();
     axios({
       method: 'get',
-      url: 'http://localhost:3003/api/affordability',
+      url: `/api/affordability/${id}`,
     })
     .then((response) => {
-      let randomIndex = Math.trunc(Math.random() * 100);
-      let homePrice = response.data[randomIndex].price;
+      // let randomIndex = Math.trunc(Math.random() * 100);
+      // let homePrice = response.data[randomIndex].price;
+      let homePrice = response.data[0].price;
+      console.log(homePrice)
       this.setState({
         homePrice: homePrice,
       })
@@ -52,6 +55,17 @@ class App extends React.Component {
       null;
     });
   }
+
+  getId() {
+    let url = window.location.href;
+    let id = window.location.href.split('/');
+    id = id[id.length - 2];
+    if (id.length > 3) {
+      return id = 1;
+    }
+    return id;
+  }
+
 
   updateValues(event) {
     let homePrice;

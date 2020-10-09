@@ -31,8 +31,19 @@ const getPrices = (callback) => {
   });
 };
 
+const getPriceFromID = (id, callback) => {
+  connection.query(`SELECT price FROM homes WHERE id=${id}`, (error, price) => {
+    if (error) {
+      callback(error);
+    } else {
+      callback(null, price);
+    }
+  })
+}
+
 module.exports = {
   insertPrices,
   seedDatabase,
   getPrices,
+  getPriceFromID,
 };
