@@ -16,7 +16,10 @@
     "seed": "node server/scripts/seed.js",
     "build": "webpack -d --watch",
     "start": "nodemon server/index.js -w",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "db-container": "bash Scripts/runDBContainer.bash",
+    "remove-db-container": "bash Scripts/removeDBContainer.bash",
+    "commit-db-container": "bash Scripts/commitAndPushDB.bash"
   },
   "dependencies": {
     "axios": "^0.20.0",
