@@ -14,8 +14,8 @@
   },
   "scripts": {
     "seed": "node server/scripts/seed.js",
-    "build": "webpack -d --watch",
-    "start": "nodemon server/index.js -w",
+    "build": "webpack -p --watch",
+    "start": "node server/index.js ",
     "test": "jest --watch",
     "db-container": "bash Scripts/runDBContainer.bash",
     "remove-db-container": "bash Scripts/removeDBContainer.bash",
