@@ -152,6 +152,7 @@ display: block;
 border-style: solid;
 border-color: transparent;
 border-width: 16px 8px 0px;
+min-width: 112px;
 @media (min-width: 376px) {
   width: 100%;
 }
@@ -184,6 +185,7 @@ letter-spacing: -0.1px;
 box-sizing: border-box;
 outline: none;
 padding: 0px 0px 16px;
+min-width:1115px;
 `;
 
 const Header = styled.h3`

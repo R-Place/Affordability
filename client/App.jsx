@@ -57,12 +57,14 @@ class App extends React.Component {
   }
 
   getId() {
-    let url = window.location.href;
-    let id = window.location.href.split('/');
-    id = id[id.length - 2];
-    if (id.length > 3) {
-      return id = 1;
+    let url = window.location.search
+    if (url.length === 0) {
+      let id = 1;
+      return id;
     }
+    // let id = url.split('/');
+    // id = id[id.length - 2];
+    let id =  Number(url.slice(4));
     return id;
   }
 
